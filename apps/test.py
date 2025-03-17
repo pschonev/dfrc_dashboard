@@ -1,16 +1,20 @@
 import marimo
 
-__generated_with = "0.10.9"
+__generated_with = "0.11.20"
 app = marimo.App(width="medium")
 
 
 @app.cell
-def _():
+def hello():
     def hello(name: str = "world") -> None:
         print(f"hello {name}")
-
-    hello("Devcontainer")
     return (hello,)
+
+
+@app.cell
+def _(hello):
+    hello("Devcontainer")
+    return
 
 
 if __name__ == "__main__":
