@@ -28,11 +28,19 @@ def export_html_wasm(notebook_path: str, output_dir: str, as_app: bool = False) 
         os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
         cmd.extend([notebook_path, "-o", output_file])
-        subprocess.run(cmd, capture_output=True, text=True, check=True)
-        return True
+
+        # Here we're explicitly providing input to accept prompts
+        # Convert single newline input to handle the overwrite prompt
+        process_result = subprocess.run(cmd, input="Y\ny\n", capture_output=True, text=True, check=True)
+
+        if process_result.returncode == 0:
+            return True
+        else:
+            print(f"Error exporting {notebook_path}:")
+            print(process_result.stderr)
+            return False
     except subprocess.CalledProcessError as e:
-        print(f"Error exporting {notebook_path}:")
-        print(e.stderr)
+        print(f"Error running export command: {e.stderr}")
         return False
     except Exception as e:
         print(f"Unexpected error exporting {notebook_path}: {e}")
