@@ -4,6 +4,7 @@ __generated_with = "0.11.20"
 app = marimo.App(
     width="medium",
     app_title="Double Fischer Random Chess Analysis",
+    layout_file="layouts/analysis_dashboard.grid.json",
 )
 
 
@@ -15,9 +16,7 @@ def _():
     import pyarrow as pa
 
     FEN_TEMPLATE = "https://lichess.org/analysis/{black}/pppppppp/8/8/8/8/PPPPPPPP/{white}_w_KQkq_-_0_1?color=white"
-    data_path = (
-        mo.notebook_location() / "public" / "analysis_results.parquet"
-    )
+    data_path = mo.notebook_location() / "public" / "analysis_results.parquet"
     return FEN_TEMPLATE, data_path, mo, pl, pa
 
 
@@ -71,8 +70,8 @@ def _(dfrc_id, fen, mo):
 @app.cell
 def _(fen, mo):
     mo.Html(
-    f'<iframe src="{fen}" style="width: 900px; aspect-ratio: 12/11;" allowtransparency="true" frameborder="0"></iframe>'
-)
+        f'<iframe src="{fen}" style="width: 900px; aspect-ratio: 12/11;" allowtransparency="true" frameborder="0"></iframe>'
+    )
     return
 
 

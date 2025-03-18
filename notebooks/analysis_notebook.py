@@ -4,6 +4,7 @@ __generated_with = "0.11.20"
 app = marimo.App(
     width="medium",
     app_title="Double Fischer Random Chess Analysis",
+    layout_file="layouts/analysis_notebook.grid.json",
 )
 
 
@@ -18,11 +19,11 @@ def _():
     data_path = (
         mo.notebook_location() / "public" / "analysis_results.parquet"
     )
-    return FEN_TEMPLATE, data_path, mo, pl, pa
+    return FEN_TEMPLATE, data_path, mo, pa, pl
 
 
 @app.cell
-def _(data_path, mo, pl, pa):
+def _(data_path, mo, pl):
     import io
     import urllib.request
 
@@ -71,8 +72,8 @@ def _(dfrc_id, fen, mo):
 @app.cell
 def _(fen, mo):
     mo.Html(
-    f'<iframe src="{fen}" style="width: 900px; aspect-ratio: 12/11;" allowtransparency="true" frameborder="0"></iframe>'
-)
+        f'<iframe src="{fen}" style="width: 900px; aspect-ratio: 12/11;" allowtransparency="true" frameborder="0"></iframe>'
+    )
     return
 
 
