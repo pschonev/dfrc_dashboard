@@ -100,13 +100,13 @@ def _(fen, mo):
 
 @app.cell
 def _(mo):
-    mo.md(f"""
+    mo.md("""
     ## Glossary
 
     - **white/black ID:** The Chess960 IDs
     - **DFRC ID:** Unique ID that corresponds to Chess960 IDs for mirrored positions
     - **sharpness score:** If this this 1, the position has a forcing line while a 0 indicates that there are plenty of good moves for both sides
-    - **playability score:** a combination of the 
+    - **playability score:** a combination of the centipawn loss and the sharpness score
     """)
     return
 
